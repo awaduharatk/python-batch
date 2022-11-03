@@ -1,0 +1,73 @@
+[tool.poetry]
+name = "python-app"
+version = "0.1.0"
+description = ""
+authors = ["awaduharatk <@gmail.com>"]
+readme = "README.md"
+#packages = [{include = "python_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.26.1"
+python-dateutil = "^2.8.2"
+
+[tool.poetry.dev-dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+sqlfluff = "^1.4.1"
+pyproject-flake8 = "^5.0.4.post1"
+mypy = "^0.982"
+pytest = "^7.2.0"
+pytest-mock = "^3.10.0"
+pytest-cov = "^4.0.0"
+moto = "^4.0.9"
+openpyxl = "^3.0.10"
+Sphinx = "^5.3.0"
+taskipy = "^1.10.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+max_line_length = 120
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+warn_unreachable = true
+strict_optional = true
+ignore_missing_imports = true
+disallow_any_generics = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+show_none_errors = true
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.sqlfluff]
+sql_file_exts = ".sql"
+
+[tool.sqlfluff.core]
+large_file_skip_char_limit = 0
+large_file_skip_byte_limit = 0
+
+[tool.sqlfluff.rules.L016]
+max_line_length = 999
+
+[tool.pytest]
+cache_dir = "/tmp/pytest-cache"
+addopts = "-p no:cacheprovider"
+
+
+[tool.taskipy.tasks]
+test = "poetry run pytest ./ -v --cov=python_app --cov-report=html --cov-report=xml"
+lint = "poetry run isort ./ && poetry run black ./ && poetry run pflake8 ./ && poetry run mypy ./"
+clean = "rm -rf ./.mypy_cache && rm -rf ./.pytest_cache"

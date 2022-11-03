@@ -1,0 +1,74 @@
+{
+    "name": "python-app",
+    "dockerComposeFile": "./docker/docker-compose.yml",
+    "service": "python-app",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.analysis.extraPaths": [
+                    "/workspace/python_app"
+                ],
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": false,
+                // flake8
+                "python.linting.flake8Enabled": true,
+                "python.linting.flake8Path": "/usr/local/bin/pyflake8",
+                "python.linting.flake8Args": [
+                    "--config",
+                    "/workspace/python-app/pyproject.toml"
+                ],
+                // mypy
+                "python.linting.mypyEnabled": true,
+                "python.linting.mypyPath": "/usr/local/bin/mypy",
+                "python.linting.mypyArgs": [
+                    "--config-file",
+                    "/workspace/python-app/pyproject.toml"
+                ],
+                // black
+                "python.formatting.provider": "black",
+                "python.formatting.blackPath": "/usr/local/bin/black",
+                "python.formatting.blackArgs": [
+                    "--config",
+                    "/workspace/python-app/pyproject.toml"
+                ],
+                // isort
+                "isrot.path": "/usr/local/bin/isort",
+                "isort.args": [
+                    "--setting-path",
+                    "/workspace/python-app/pyproject.toml"
+                ],
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": true
+                },
+                // sqlfluff
+                "sqlfluff.executablePath": "/usr/local/bin/sqlfluff",
+                "sqlfluff.format.enabled": true,
+                "sqlfluff.format.arguments": [
+                    "--FIX-EVEN-UNPARSABLE"
+                ],
+                "sqlfluff.dialect": "mysql",
+                "sqlfluff.linter.run": "onSave",
+                "sqlfluff.excludeRules": [
+                    "L031"
+                ],
+                // coverage gutter
+                "coverage-gutters.showLineCoverage": true,
+                "coverage-gutters.showRulerCoverage": true,
+                "coverage-gutters.coverageFileNames": [
+                    "coverage.xml"
+                ]
+            }
+        }
+    },
+    "extensions": [
+        "ms-python.python",
+        "njpwerner.autodocstring",
+        "dorzey.vscode-sqlfluff",
+        "ryanluker.vscode-coverage-gutters"
+    ],
+    "shutdownAction": "stopCompose",
+    "postCreateCommand": "pip install -e ./python-app"
+}
