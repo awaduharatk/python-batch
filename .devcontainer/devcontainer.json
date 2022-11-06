@@ -1,7 +1,7 @@
 {
     "name": "python-app",
-    "dockerComposeFile": "./docker/docker-compose.yml",
-    "service": "python-app",
+    "dockerComposeFile": "./docker/docker-compose.development.yml",
+    "service": "python-develop",
     "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
@@ -67,8 +67,9 @@
         "ms-python.python",
         "njpwerner.autodocstring",
         "dorzey.vscode-sqlfluff",
-        "ryanluker.vscode-coverage-gutters"
+        "ryanluker.vscode-coverage-gutters",
+        "mikestead.dotenv"
     ],
-    "shutdownAction": "stopCompose",
-    "postCreateCommand": "pip install -e ./python-app"
+    "shutdownAction": "stopCompose"
+    // ,"postCreateCommand": "pip install -e ./python-app"
 }

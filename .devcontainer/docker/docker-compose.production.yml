@@ -4,8 +4,7 @@ services:
     build:
       context: ../../
       dockerfile: ./.devcontainer/docker/Dockerfile
-      target: development
-    privileged: true
-    volumes:
-      - ../../:/workspace:cached
-    command: sleep infinity
+      target: production
+    env_file:
+      - ../enviroment/production.env
+    # command: sleep infinity

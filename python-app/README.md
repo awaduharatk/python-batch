@@ -1,13 +1,17 @@
 
 
-- Sphinx試す
-
-
 ## task
 ```
 poetry run task test
 
 poetry run task lint
+```
+
+## makefile
+```
+make lint
+make test
+make clean
 ```
 
 
@@ -26,3 +30,6 @@ poetry run task lint
 |  yapf  | pythonのコード自動整形ツール   |
 | | |
 | | |
+
+
+

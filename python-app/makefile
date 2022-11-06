@@ -8,4 +8,7 @@ lint:
 	# poetry run sqlfluff
 
 test:
-	poetry run pytest ./ -v --cov=python_app --cov-report=html --cov-report=xml
+	poetry run pytest -v --cov=python_app --cov-report=html --cov-report=xml
+
+clean:
+	rm -rf ./htmlcov ./.coverage ./coverage.xml

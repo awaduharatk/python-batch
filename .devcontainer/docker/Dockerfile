@@ -17,11 +17,12 @@ WORKDIR /workspace
 FROM python-base as initial
 # python env
 ENV PYTHONUTF8=1 \
+PYTHONPATH="/workspace/python-app/python_app:$PYTHONPATH" \
+PYTHONPYCACHEPREFIX=/tmp/pycache \
 POETRY_VERSION=1.2.1 \
 POETRY_HOME=/opt/poetry \
 PYSETUP_PATH="/opt/pysetup" \
 LIB_PATH="./python-app"
-ENV PYTHONPYCACHEPREFIX=/tmp/pycache
 
 # install poetry
 RUN curl -sSL https://install.python-poetry.org | python && \
@@ -35,12 +36,16 @@ FROM initial as development
 RUN apt-get install -y vim less
 RUN echo "alias ll='ls -la --color'" >> /root/.bashrc
 WORKDIR $PYSETUP_PATH
+
+# library install
 COPY ["${LIB_PATH}/pyproject.toml", "${LIB_PATH}/poetry.lock", "./"]
-# COPY ["${LIB_PATH}/pyproject.toml",  "./"]
 RUN poetry install
 
 
 FROM initial as production
-# WORKDIR $PYSETUP_PATH
-COPY ["${LIB_PATH}/pyproject.toml", "${LIB_PATH}/poetry.lock", "./"]
+COPY ["./python-app/", "/src/python-app/"]
+WORKDIR /src/python-app/
 RUN poetry install --no-dev
+# TODO
+ENV PYTHONPATH="/src/python-app/python_app:$PYTHONPATH"
+ENTRYPOINT [ "python" ]

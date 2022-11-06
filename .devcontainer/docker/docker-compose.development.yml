@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  python-develop:
+    build:
+      context: ../../
+      dockerfile: ./.devcontainer/docker/Dockerfile
+      target: development
+    privileged: true
+    volumes:
+      - ../../:/workspace:cached
+    env_file:
+      - ../enviroment/development.env
+    command: sleep infinity
