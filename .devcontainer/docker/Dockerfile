@@ -22,7 +22,8 @@ PYTHONPYCACHEPREFIX=/tmp/pycache \
 POETRY_VERSION=1.2.1 \
 POETRY_HOME=/opt/poetry \
 PYSETUP_PATH="/opt/pysetup" \
-LIB_PATH="./python-app"
+LIB_PATH="./python-app" \
+PYTEST_ADDOPTS="-p no:cacheprovider"
 
 # install poetry
 RUN curl -sSL https://install.python-poetry.org | python && \
