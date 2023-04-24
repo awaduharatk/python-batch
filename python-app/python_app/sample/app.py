@@ -9,7 +9,7 @@ class SampleApp(BatchProcessor):
         BatchProcessor (_type_): _description_
     """
 
-    def __init__(self, *args: str, **kwargs) -> None:
+    def __init__(self, *args: str, **kwargs: str) -> None:
         """
         コンストラクタ
         """

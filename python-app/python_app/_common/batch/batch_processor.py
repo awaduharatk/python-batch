@@ -1,15 +1,16 @@
 from typing import final
 import logging
 from _common.properties import Properties
+from abc import ABCMeta, abstractmethod
 
 
-class BatchProcessor:
+class BatchProcessor(metaclass=ABCMeta):
     """
     ベースクラス
     各処理はこのクラスを継承して実装する
     """
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: str) -> None:
         """
         初期化
         共通部品などの初期化もここで行う
@@ -36,8 +37,9 @@ class BatchProcessor:
 
         logging.info("Process End")
 
+    @abstractmethod
     def process(self) -> None:
         """
-        この処理をオーバライドする
+        ここをオーバーライドして各処理の実装をする
         """
         pass
